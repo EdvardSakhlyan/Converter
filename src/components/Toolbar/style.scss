@@ -1,4 +1,21 @@
-form {
-  height: 90vh;
-  width: 50vw;
+.toolbar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  form {
+    height: 100vh;
+    width: 50vw;
+
+    section {
+      height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-direction: column;
+    }
+
+    section:nth-child(1) {
+      background: rgba(141, 141, 141, 0.18);
+    }
+  }
 }

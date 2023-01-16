@@ -26,26 +26,36 @@ const Toolbar : React.FC<IToolbarProps> = ({setResult , setTo ,to}) => {
 
 
     return (
-        <div className="tool-bar">
+        <div className="toolbar">
             <form onSubmit={handleSubmit}>
-                <label htmlFor="from">From</label>
-                <select  name="from" onChange={(event) => handleChange(event , setFrom)}>
-                    <option>AMD</option>
-                    <option>USD</option>
-                    <option>EUR</option>
-                    <option>RUB</option>
-                </select>
-                <label htmlFor="to">To</label>
-                <select name="to" onChange={(event) => handleChange(event , setTo)}>
-                    <option>USD</option>
-                    <option>AMD</option>
-                    <option>EUR</option>
-                    <option>RUB</option>
-                </select>
-                <label htmlFor="amount">Amount</label>
-                <input name="amount" onChange={(event) => handleChange(event , setAmount)}/>
-                <input type="submit" value="Convert"/>
-                <input type="reset" value="Reset"/>
+                <section>
+                    <div className="from-to-box">
+                        <label htmlFor="from">From</label>
+                        <select  name="from" onChange={(event) => handleChange(event , setFrom)}>
+                            <option>AMD</option>
+                            <option>USD</option>
+                            <option>EUR</option>
+                            <option>RUB</option>
+                        </select>
+                    </div>
+                    <div className="to-box">
+                        <label htmlFor="to">To</label>
+                        <select name="to" onChange={(event) => handleChange(event , setTo)}>
+                            <option>USD</option>
+                            <option>AMD</option>
+                            <option>EUR</option>
+                            <option>RUB</option>
+                        </select>
+                    </div>
+                </section>
+                <section >
+                    <div className="amount-box">
+                        <label htmlFor="amount">Amount</label>
+                        <input name="amount" onChange={(event) => handleChange(event , setAmount)}/>
+                    </div>
+                    <input type="submit" value="Convert"/>
+                    <input type="reset" value="Reset"/>
+                </section>
             </form>
         </div>
     );
