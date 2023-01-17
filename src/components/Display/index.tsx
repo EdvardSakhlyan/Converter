@@ -10,8 +10,11 @@ const Display : React.FC<IDisplayProps> = ({result, to}) => {
 
     return (
         <div className="display">
-            <h1>{result}</h1>
-            <h2>{to}</h2>
+            <h1>Result</h1>
+            <div className="view">
+                <h2>{result}</h2>
+                <h3>{to}</h3>
+            </div>
         </div>
     );
 };

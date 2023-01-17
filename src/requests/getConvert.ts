@@ -1,5 +1,9 @@
 import React from "react"
-type convertRequestType = (from: string, to: string, amount:number , setState : React.Dispatch<number> ) => Promise<number>
+export type ConvertReqResult = {
+    result: number ,
+    to: string
+}
+type convertRequestType = (from: string, to: string, amount:number , setState : React.Dispatch<ConvertReqResult> ) => Promise<ConvertReqResult>
 
 const getConvert : convertRequestType = async (from, to, amount, setState)  => {
     let headers = new Headers();
@@ -12,9 +16,11 @@ const getConvert : convertRequestType = async (from, to, amount, setState)  => {
 
     const data = await response.json()
 
-    setState(data.result)
+    console.log(data)
 
-    return data
+    setState({result: data.result , to: data.query.to})
+
+    return {result: data.result , to: data.query.to}
 
 }
 
