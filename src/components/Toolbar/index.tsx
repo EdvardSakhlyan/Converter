@@ -4,26 +4,33 @@ import "./style.scss"
 
 interface IToolbarProps {
     setResult : React.Dispatch<ConvertReqResult>,
-    setTo: React.Dispatch<string>
-    to : string
 }
 
-type MyChangeElements = HTMLInputElement | HTMLSelectElement
+type ChangeElements = HTMLInputElement | HTMLSelectElement
 
-const Toolbar : React.FC<IToolbarProps> = ({setResult , setTo ,to}) => {
+interface CurrencyState {
+    from: string;
+    to: string;
+    amount: number;
+}
 
-    const [from, setFrom] = useState<string>("AMD")
+const Toolbar : React.FC<IToolbarProps> = ({setResult}) => {
+    const [state, setState] = useState<CurrencyState>({
+        from: "AMD",
+        to: "USD",
+        amount: 0
+    })
 
-    const [amount, setAmount] = useState<number>(0)
-
-    const handleChange = (event : React.ChangeEvent<MyChangeElements> , setState : React.Dispatch<string | number | any >) : void => {//????????????
-        console.log(typeof event.target.value)
-        setState(event.target.value)
+    const handleChange = (event : React.ChangeEvent<ChangeElements>) : void => {//????????????
+        setState({
+            ...state,
+            [event.target.name]: event.target.value
+        })
     }
 
     const handleSubmit = (event : React.FormEvent<HTMLFormElement>) : void => {
         event.preventDefault()
-        getConvert(from,to,amount,setResult).catch(err => console.error(err))
+        getConvert(state.from,state.to,state.amount,setResult).catch(err => console.error(err))
     }
 
     return (
@@ -32,7 +39,7 @@ const Toolbar : React.FC<IToolbarProps> = ({setResult , setTo ,to}) => {
                 <section>
                     <div className="from-to-box">
                         <label htmlFor="from">From</label>
-                        <select name="from" defaultValue={from} onChange={(event) => handleChange(event, setFrom)}>
+                        <select name="from" defaultValue={state.from} onChange={handleChange}>
                             <option>AMD</option>
                             <option>USD</option>
                             <option>EUR</option>
@@ -41,7 +48,7 @@ const Toolbar : React.FC<IToolbarProps> = ({setResult , setTo ,to}) => {
                     </div>
                     <div className="from-to-box">
                         <label htmlFor="to">To</label>
-                        <select name="to" defaultValue={to} onChange={(event) => handleChange(event, setTo)}>
+                        <select name="to" defaultValue={state.to} onChange={handleChange}>
                             <option>USD</option>
                             <option>AMD</option>
                             <option>EUR</option>
@@ -52,7 +59,7 @@ const Toolbar : React.FC<IToolbarProps> = ({setResult , setTo ,to}) => {
                 <section>
                     <div className="amount-box">
                         <label htmlFor="amount">Amount</label>
-                        <input type="number" name="amount" onChange={(event) => handleChange(event, setAmount)}
+                        <input type="number" name="amount" onChange={handleChange}
                                placeholder="Enter amount"/>
                     </div>
                     <div className="buttons-box">

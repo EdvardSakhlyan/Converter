@@ -11,11 +11,9 @@ const Converter : React.FC = () => {
         to: ""
     })
 
-    const [to, setTo] = useState<string>("USD")
-
     return (
         <div className="converter">
-            <Toolbar setResult={setResult} setTo={setTo} to={to}/>
+            <Toolbar setResult={setResult}/>
             <Display result={result.result} to={result.to}/>
         </div>
     );
